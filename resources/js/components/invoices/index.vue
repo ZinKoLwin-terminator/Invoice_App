@@ -42,7 +42,7 @@
                 </div>
                 <div class="relative">
                     <i class="table--search--input--icon fas fa-search "></i>
-                    <input class="table--search--input" type="text" placeholder="Search invoice">
+                    <input class="table--search--input" type="text" placeholder="Search invoice" v-model="searchInvoice" @keyup="search()">
                 </div>
             </div>
 
@@ -86,23 +86,35 @@ import axios from "axios"; // Import Axios
 export default {
   setup() {
     let invoices = ref([]);
+    let searchInvoice = ref([]);
 
     onMounted(async () => {
        getInvoices();
-    });
+    })
 
     const getInvoices = async () => {
       try {
         let response = await axios.get("/api/get_all_invoices");
         invoices.value = response.data.invoices;
-        console.log('response',response);
+        // console.log('response',response);
       } catch (error) {
         console.error('Error fetching invoices:', error);
       }
+    }
+    const search = async () => {
+      try {
+        let response = await axios.get('/api/search_invoice?s=' + searchInvoice.value);
+        invoices.value = response.data.invoices;
+      } catch (error) {
+        console.error('Error searching invoices:', error);
+      }
     };
 
+
     return {
-      invoices
+        invoices,
+        search,
+searchInvoice
     };
   }
 };
