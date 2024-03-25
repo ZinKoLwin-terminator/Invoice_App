@@ -125,7 +125,7 @@ export default {
         invoices,
         search,
         newInvoice,
-searchInvoice
+        searchInvoice
     };
   }
 };
