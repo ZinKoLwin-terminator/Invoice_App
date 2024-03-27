@@ -59,7 +59,7 @@
 
     <div v-if="invoices.length > 0">
       <div v-for="item in invoices" :key="item.id" class="table--items">
-        <a href="#" class="table--items--transactionId">#{{ item.id }}</a>
+        <a href="#" class="table--items--transactionId" @click="onShow(item.id)">#{{ item.id }}</a>
         <p>{{ item.date }}</p>
         <p>#{{ item.number }}</p>
         <p v-if="item.customer">{{ item.customer.firstname}}</p>
@@ -120,12 +120,17 @@ export default {
             router.push('/invoices/new');
         }
 
+        const onShow = (id) => {
+            router.push('/invoice/show/'+id)
+        }
+
 
     return {
         invoices,
         search,
         newInvoice,
-        searchInvoice
+        searchInvoice,
+        onShow
     };
   }
 };

@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <p class="my-1">Date</p>
-                    <input id="date" placeholder="dd-mm-yyyy" type="date" class="input" > <!---->
+                    <input id="date" placeholder="dd-mm-yyyy" type="date" class="input" v-model="form.date"> <!---->
                     <p class="my-1">Due Date</p>
                     <input id="due_date" type="date" class="input" v-model="form.due_date">
                 </div>
